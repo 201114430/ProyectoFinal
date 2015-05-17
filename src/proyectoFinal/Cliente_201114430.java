@@ -18,8 +18,11 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 	Icono_201114430 guardar = new Icono_201114430(350, 50,5);
 	Icono_201114430 buscar = new Icono_201114430(350, 180,6);
 	Icono_201114430 eliminar = new Icono_201114430(350, 310,7);
+	public javax.swing.JButton imagenEm,buscarIma;
+	public JTextField codigoCli,nombreCli,apellidoCli,nitCli;
+	public JLabel barraEstado;
+	public final String ruta = System.getProperties().getProperty("user.dir");
 	
-
 	public void mostrarCli(){
 		NodoCliente_201114430 tmp = inicio;
 		if(tmp == null){
@@ -36,13 +39,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}
 		}
 	}
-	
-	public javax.swing.JButton imagenEm,buscarIma;
-	public JTextField codigoCli,nombreCli,apellidoCli,nitCli;
-	public String nombre;
-	public JLabel barraEstado;
-	public final String ruta = System.getProperties().getProperty("user.dir");
-	
 	public void agregarCli(int codigoCliente,String nombreCliente, String apellidoCliente,int nitCliente){
 		if(inicio==null){
 			inicio = new NodoCliente_201114430(codigoCliente,nombreCliente, apellidoCliente,nitCliente);
@@ -53,7 +49,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			inicio.siguiente = tmp;
 		}
 	}	
-	
 	public void eliminarCli(int codigoCl){
 		NodoCliente_201114430 tmp = inicio;
 		NodoCliente_201114430 anterior = null;
@@ -76,8 +71,7 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}			
 		}		
 	}
-	
-	public void buscarEm(int codigoCl){
+	public void buscarCli(int codigoCl){
 		NodoCliente_201114430 tmp = inicio;
 		boolean siEsta = false;
 		while(tmp != null){
@@ -96,7 +90,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 		if(!siEsta)
 			barraEstado.setText("Cliente no existe.");		
 	}
-	
 	public void grabarListaEnFichero(){
 		EscribirFichero_201114430 es = new EscribirFichero_201114430();
 		
@@ -115,7 +108,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}
 		}
 	}
-	
 	private void borrarLista() {
 		if(inicio == null){
 			barraEstado.setText("Realizando busqueda...");
@@ -126,14 +118,12 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}
 		}
 	}
-	
 	public void vaciaCajaTexto(){
 		codigoCli.setText(null);
 		nombreCli.setText(null);
 		apellidoCli.setText(null);
 		nitCli.setText(null);			
 	}
-	
  	public Cliente_201114430() {
 		configuracionVentana();
 		iniciaComponente();
@@ -209,7 +199,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 		String linea;// Guarda de forma dinamica cada linea que se lee en el fichero
 			while((linea=br.readLine())!=null){
 				String[] argtext = linea.split(",");
-				//nombre = argtext[1] + " " + argtext[2];
 				agregarCli(Integer.parseInt(argtext[0]), argtext[1], argtext[2], Integer.parseInt(argtext[3]));
 				// codigoEmpleado, nombreEmpleado, apellidoEmpleado, edadEmpleado, cargoEmpleado);
 			}
@@ -229,7 +218,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}
 		}
 	//////////////////////////////Finaliza Leer Fichero//////////////////////////
-	
 	@Override
 	public void mousePressed(MouseEvent even) {
 		if (even.getSource()==guardar) {
@@ -256,7 +244,7 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			String buscaNumeroDeCliente = JOptionPane.showInputDialog("Ingrese codigo del Cliente.");
 			if(buscaNumeroDeCliente != null){
 				if(esNumero(buscaNumeroDeCliente)){
-					buscarEm(Integer.parseInt(buscaNumeroDeCliente));
+					buscarCli(Integer.parseInt(buscaNumeroDeCliente));
 					eliminar.setEnabled(true);
 				}
 			}
@@ -286,7 +274,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 				barraEstado.setText("Rellene todos los campos");
 		}		
 	}
-	
 	public boolean campoVacio(String contenidoCaja){
 		if(contenidoCaja != null)
 			return true;
@@ -297,7 +284,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 				return true;
 		return false;
 	}
-	
 	@Override
 	public void mouseClicked(MouseEvent even) {}
 	@Override

@@ -38,6 +38,7 @@ public class Ventas_201114430 extends JFrame implements MouseListener {
 		setLayout(null);
 		setTitle("Ventas");
 		setSize(500, 470);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 	}

@@ -5,6 +5,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.sun.javafx.geom.RoundRectangle2D;
+
 public class Icono_201114430 extends JButton{
 	int x;
 	int y;
@@ -17,7 +19,7 @@ public class Icono_201114430 extends JButton{
 		this.ancho = ancho;
 		this.alto = alto;
 		setBorderPainted(true);
-	    setContentAreaFilled(true);
+	    setContentAreaFilled(false);
 	    setBounds(x,y,ancho,alto);
 	    setVisible(false);
 		String urlIconoGrande = imagenIcon(a);

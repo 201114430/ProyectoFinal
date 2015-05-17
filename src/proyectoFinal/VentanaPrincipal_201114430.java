@@ -53,7 +53,7 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
  	private void initfondo(){//fondo de la Ventana Principal si funciona
 		setLayout(null);
 		Container container = getContentPane();
-		Icono_201114430 fondo = new Icono_201114430(0,0);
+		Icono_201114430 fondo = new Icono_201114430(0,40);
 		container.add(fondo);		
 	}
  	public void iniciaIcono(){
@@ -171,7 +171,7 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
 			etiquetaIcon.setText("Ventas                 Empleados               de fecha                  Cliente");
 			botonVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rv.png")));
 			botonEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/re.png")));
-			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rp.png")));
+			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rf.png")));
 			botonCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/ce.png")));
 			this.generarReportes = true;
 			this.ingresarDatos = false;
