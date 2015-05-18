@@ -3,10 +3,13 @@ package proyectoFinal;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,17 +24,17 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
 	Icono_201114430 botonEmpleado = new Icono_201114430(280, 100, 220, 220,2);
 	Icono_201114430 botonProducto = new Icono_201114430(530, 100, 220, 220,3);
 	Icono_201114430 botonCliente = new Icono_201114430(780, 100, 220, 220,4);
-	Icono_201114430 botonVenExt = new Icono_201114430(70, 400,1);
-	Icono_201114430 botonEmpExt = new Icono_201114430(340, 400,2);
-	Icono_201114430 botonProExt = new Icono_201114430(590, 400,3);
-	Icono_201114430 botonCliExt = new Icono_201114430(840, 400,4);
+	Icono_201114430 botonVenExt = new Icono_201114430(70, 400,8);
+	Icono_201114430 botonEmpExt = new Icono_201114430(340, 400,10);
+	Icono_201114430 botonProExt = new Icono_201114430(590, 400,11);
+	Icono_201114430 botonCliExt = new Icono_201114430(840, 400,12);
 	Ventas_201114430 ventas;
 	Empleado_201114430 empleado;
 	Producto_201114430 producto;
 	Cliente_201114430 cliente;
 	
 	public javax.swing.JLabel etiquetaIcon,etiquetaIcon1,etiquetaIcon2,barraEstado;
-	public javax.swing.JButton ingresar,reporte;
+	public javax.swing.JButton ingresar,reporte,autor;
  	public boolean ingresarDatos;
  	public boolean generarReportes;
 
@@ -53,7 +56,7 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
  	private void initfondo(){//fondo de la Ventana Principal si funciona
 		setLayout(null);
 		Container container = getContentPane();
-		Icono_201114430 fondo = new Icono_201114430(0,40);
+		Icono_201114430 fondo = new Icono_201114430(0,0);
 		container.add(fondo);		
 	}
  	public void iniciaIcono(){
@@ -62,36 +65,62 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
 		container.setLayout(null);
 		///////////////////Boton Venta////////////////////////
 		container.add(botonVenta);
-		//botonVenta.setVisible(true);
-		//botonVenta.setEnabled(false);
 		botonVenta.addMouseListener(this);
 		///////////////////Boton Empleado//////////////////////
 		container.add(botonEmpleado);
-		//botonEmpleado.setVisible(true);
-		//botonEmpleado.setEnabled(false);
 		botonEmpleado.addMouseListener(this);
 		///////////////////Boton Producto//////////////////////
 		container.add(botonProducto);
-		//botonProducto.setVisible(true);
-		//botonProducto.setEnabled(false);
 		botonProducto.addMouseListener(this);
 		///////////////////Boton Cliente///////////////////////
 		container.add(botonCliente);
-		//botonCliente.setVisible(true);
-		//botonCliente.setEnabled(false);
 		botonCliente.addMouseListener(this);
+		///////////////////Boton Cliente///////////////////////
+		autor=new JButton("?");
+		container.add(autor);
+		autor.setVisible(true);
+		autor.setBounds(990, 530, 30, 20);
+		//autor.addMouseListener(this);
+		autor.addActionListener(
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent evento) {
+						JOptionPane.showMessageDialog( VentanaPrincipal_201114430.this,
+					               "RPC (Reportes Parar Clientes) versio Beta \n"+ "Proyecto Final \nIntroduccion a la programacion y computacion.\n"+"18/05/2015 \nDesarrollado por Juan del Cid. ",
+					               "Acerca de", JOptionPane.PLAIN_MESSAGE );
+						try {
+			    			  if (Desktop.isDesktopSupported()) {
+			    			  Desktop desktop = Desktop.getDesktop();
+			    			  if (desktop.isSupported(Desktop.Action.BROWSE)) {
+			    			  desktop.browse(new URI("https://www.youtube.com/user/JUANJESUSPEREZDELCID/videos"));
+			    			  }
+			    			  }
+			    			  } catch (Exception e) {
+			    			  e.printStackTrace();
+			    			  }
+						
+					}
+				}
+		);
 		///////////////////Boton Ingresar///////////////////////
-        ingresar=new JButton("Agregar o Eliminar:");
+        ingresar=new JButton();
         ingresar.setBounds(0, 0, 270, 40);	
         container.add(ingresar);
 		ingresar.setVisible(true);
+		ingresar.setBorderPainted(false);
+		ingresar.setContentAreaFilled(false);
+		ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a1.png")));
 		ingresar.setFont(new java.awt.Font("CONSOLA", 0, 20));
 		ingresar.addMouseListener(this);
 		///////////////////Boton Reporte///////////////////////
-        reporte=new JButton("Generar Reportes:");
+        reporte=new JButton();
         reporte.setBounds(270, 0, 250, 40);	
         container.add(reporte);
-		reporte.setVisible(true);
+        reporte.setVisible(true);
+        reporte.setBorderPainted(false);
+        reporte.setContentAreaFilled(false);
+        reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a3.png")));
 		reporte.setFont(new java.awt.Font("CONSOLA", 0, 20));
 		reporte.addMouseListener(this);
 		////////////////////////Botones para seleccionar Fichero y generar reporte//////////////
@@ -152,6 +181,16 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
 			return "clt";
 		return null;		
 	}
+	public void abrirarchivo(String archivo){
+	     try {
+	            File reporteSeleccionado = new File (archivo);
+	            Desktop.getDesktop().open(reporteSeleccionado);
+
+	     }catch (IOException ex) {
+
+	            System.out.println("Errores encontrados");
+	     }
+	} 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (e.getSource()==botonVenta && ingresarDatos) {
@@ -453,21 +492,74 @@ public class VentanaPrincipal_201114430 extends JFrame implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {}
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {	}
 	@Override
-	public void mouseEntered(MouseEvent e) {}
-	public void abrirarchivo(String archivo){
-	     try {
-	            File reporteSeleccionado = new File (archivo);
-	            Desktop.getDesktop().open(reporteSeleccionado);
-
-	     }catch (IOException ex) {
-
-	            System.out.println("Errores encontrados");
-	     }
-	} 
+	public void mouseEntered(MouseEvent e) {
+		if(e.getSource()==ingresar){
+			ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a2.png")));
+		}
+		if(e.getSource()==reporte){
+			reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a4.png")));
+		}
+		if (e.getSource()==botonVenta && ingresarDatos) {
+			botonVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i1.png")));
+		}
+		if (e.getSource()==botonEmpleado && ingresarDatos) {
+			botonEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i2.png")));
+		}
+		if(e.getSource()==botonProducto && ingresarDatos){
+			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i3.png")));
+		}
+		if(e.getSource()==botonCliente && ingresarDatos){
+			botonCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i4.png")));
+		}
+		////////////////////
+		if (e.getSource()==botonVenta && generarReportes) {
+			botonVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i5.png")));
+		}
+		if (e.getSource()==botonEmpleado && generarReportes) {
+			botonEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i6.png")));
+		}
+		if(e.getSource()==botonProducto && generarReportes){
+			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i7.png")));
+		}
+		if(e.getSource()==botonCliente && generarReportes){
+			botonCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/i8.png")));
+		}
+	}
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+		if(e.getSource()==ingresar){
+			ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a1.png")));
+		}
+		if(e.getSource()==reporte){
+			reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/a3.png")));
+		}
+		if (e.getSource()==botonVenta && ingresarDatos) {
+			botonVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/v1.png")));
+		}
+		if (e.getSource()==botonEmpleado && ingresarDatos) {
+			botonEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/e4.png")));
+		}
+		if(e.getSource()==botonProducto && ingresarDatos){
+			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/p2.png")));
+		}
+		if(e.getSource()==botonCliente && ingresarDatos){
+			botonCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rc.png")));
+		}
+		if (e.getSource()==botonVenta && generarReportes) {
+			botonVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rv.png")));
+		}
+		if (e.getSource()==botonEmpleado && generarReportes) {
+			botonEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/re.png")));
+		}
+		if(e.getSource()==botonProducto && generarReportes){
+			botonProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/rf.png")));
+		}
+		if(e.getSource()==botonCliente && generarReportes){
+			botonCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/ce.png")));
+		}
+	}
 	public static void main(String[] args){
 		VentanaPrincipal_201114430 ventanaprincipal = new VentanaPrincipal_201114430();
 	}

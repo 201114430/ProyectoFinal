@@ -6,7 +6,8 @@ public class NodoEmpleado_201114430 {
 	public String nombreEmpleado,apellidoEmpleado,cargoEmpleado;
 	public int  codigoEmpleado,edadEmpleado;
 	
-	public NodoEmpleado_201114430(int codigoEmpleado,String nombreEmpleado, String apellidoEmpleado,int edadEmpleado,String cargoEmpleado) {
+	public NodoEmpleado_201114430(int codigoEmpleado,String nombreEmpleado, 
+			String apellidoEmpleado,int edadEmpleado,String cargoEmpleado) {
 		this.codigoEmpleado = codigoEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
 		this.apellidoEmpleado = apellidoEmpleado;

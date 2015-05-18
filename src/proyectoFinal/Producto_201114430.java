@@ -243,7 +243,7 @@ public class Producto_201114430 extends JFrame implements MouseListener{
 		}
 		if(even.getSource() == eliminar){
 			if(esNumero(codigoPro.getText()) && campoVacio(descripcionPro.getText()) && esNumero(precioPro.getText())){
-				int confirma = JOptionPane.showOptionDialog(null, "Esta seguro de eliminar \n" + "el producto de la base de datos.", "Confirma Guardar Datos", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[] {"Aceptar", "Cancelar"},null);
+				int confirma = JOptionPane.showOptionDialog(null, "Esta seguro de eliminar \n" + "el producto de la base de datos.", "Confirmar Eliminacion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[] {"Aceptar", "Cancelar"},null);
 				if(confirma == 0){
 					EscribirFichero_201114430 es = new EscribirFichero_201114430();
 					es.borrarContenidoFichero(3);//numero de fichero que quiero borrar

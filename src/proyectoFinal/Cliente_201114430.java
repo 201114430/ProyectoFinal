@@ -71,7 +71,7 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			}			
 		}		
 	}
-	public void buscarCli(int codigoCl){
+	public void buscarEm(int codigoCl){
 		NodoCliente_201114430 tmp = inicio;
 		boolean siEsta = false;
 		while(tmp != null){
@@ -185,6 +185,16 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 		add(datosVenta);
 		setVisible(true);
 	}
+	public boolean campoVacio(String contenidoCaja){
+		if(contenidoCaja != null)
+			return true;
+		return false;
+	}
+	public boolean esNumero(String numLetras){
+		if((numLetras).matches("([0-9]|\\.)+"))
+				return true;
+		return false;
+	}
 	////////////Metodo para leer fichero y Cargarlo a Memoria Dinamica//////////////////
 	public void cargarDatos(int archivoEscogido){
 		File archivo = null;
@@ -244,7 +254,7 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			String buscaNumeroDeCliente = JOptionPane.showInputDialog("Ingrese codigo del Cliente.");
 			if(buscaNumeroDeCliente != null){
 				if(esNumero(buscaNumeroDeCliente)){
-					buscarCli(Integer.parseInt(buscaNumeroDeCliente));
+					buscarEm(Integer.parseInt(buscaNumeroDeCliente));
 					eliminar.setEnabled(true);
 				}
 			}
@@ -254,7 +264,7 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 		}
 		if(even.getSource()==eliminar){
 			if(esNumero(codigoCli.getText()) && campoVacio(nombreCli.getText())){
-			int confirma = JOptionPane.showOptionDialog( null,"Esta seguro de elimiar \n" + "el registro del cliente.","Confirma Guardar Datos.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, new Object[] { "Aceptar", "Cancelar",},null);
+			int confirma = JOptionPane.showOptionDialog( null,"Esta seguro de elimiar \n" + "el registro del cliente.","Confirmar Eliminacion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,null, new Object[] { "Aceptar", "Cancelar",},null);
 			if(confirma == 0){
 				EscribirFichero_201114430 es = new EscribirFichero_201114430();
 				es.borrarContenidoFichero(4);//numero de fichero que quiero borrar
@@ -273,16 +283,6 @@ public class Cliente_201114430 extends JFrame implements MouseListener{
 			else
 				barraEstado.setText("Rellene todos los campos");
 		}		
-	}
-	public boolean campoVacio(String contenidoCaja){
-		if(contenidoCaja != null)
-			return true;
-		return false;
-	}
-	public boolean esNumero(String numLetras){
-		if((numLetras).matches("([0-9]|\\.)+"))
-				return true;
-		return false;
 	}
 	@Override
 	public void mouseClicked(MouseEvent even) {}

@@ -753,6 +753,7 @@ public class Reportes_201114430 {
 				String[] argtext = linea.split(",");
 				switch(archivoEscogido){
 				case 1://carga a lista documentos VENTA.fct
+
 					agregarVentas(argtext[0], argtext[1], Integer.parseInt(argtext[2]), argtext[3], argtext[4]);
 					break;
 				case 2:

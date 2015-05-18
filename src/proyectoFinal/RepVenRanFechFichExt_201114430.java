@@ -24,7 +24,6 @@ public class RepVenRanFechFichExt_201114430 extends JFrame implements MouseListe
 	public javax.swing.JButton reporteFecha;
 	public JTextField fechaIni,fechaFin;
 	public JLabel barraEstado;
-	public String nombre;
 
  	public RepVenRanFechFichExt_201114430() {
 		seleccionarFichero();
@@ -148,7 +147,7 @@ public class RepVenRanFechFichExt_201114430 extends JFrame implements MouseListe
 	            System.out.println("Errores encontrados");
 	     }
 	}
-	public void borraCaja(){
+	public void vaciaCajaTexto(){
 		fechaIni.setText(null);
 		fechaFin.setText(null);
 	}
@@ -163,28 +162,22 @@ public class RepVenRanFechFichExt_201114430 extends JFrame implements MouseListe
 					String[] fechaF = ff.split("\\.");
 					int diafin = (Integer.parseInt(fechaF[0]) + Integer.parseInt(fechaF[1])*30 + Integer.parseInt(fechaF[2])*360);
 					if(diaini <= diafin){
-						//Reportes_201114430 re = new Reportes_201114430();
-						
-						/*re.cargarDatos(1);
-						re.cargarDatos(2);
-						re.cargarDatos(3);
-						re.cargarDatos(4);*/
 						re.mostrarVentas();
 						re.mostrarProducto();
 						re.ordenarVenFech();
 						re.llenarRepVentFec(fi,ff );
 						re.generaRepVenRanFech();
 						abrirarchivo("VentasRangoFechas.html");
-						borraCaja();
+						vaciaCajaTexto();
 					}
 					else{
 						barraEstado.setText("Fecha incial mayor que fecha final.");
-						borraCaja();
+						vaciaCajaTexto();
 					}
 				}
 				else{
 					barraEstado.setText("Rango de Fecha incorrecta.");
-					borraCaja();
+					vaciaCajaTexto();
 				}
 		}
 		dispose();

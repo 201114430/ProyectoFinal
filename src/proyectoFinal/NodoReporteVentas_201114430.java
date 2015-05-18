@@ -25,5 +25,4 @@ public class NodoReporteVentas_201114430 {
 		this.total = total;
 		this.siguiente = null;
 	}
-
 }

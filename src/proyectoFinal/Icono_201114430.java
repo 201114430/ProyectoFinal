@@ -18,7 +18,7 @@ public class Icono_201114430 extends JButton{
 		this.y = y;
 		this.ancho = ancho;
 		this.alto = alto;
-		setBorderPainted(true);
+		setBorderPainted(false);
 	    setContentAreaFilled(false);
 	    setBounds(x,y,ancho,alto);
 	    setVisible(false);
@@ -83,6 +83,12 @@ public class Icono_201114430 extends JButton{
 			return "/imagen/rv.png";
 		else if(figura==9)
 			return "/imagen/f.jpg";
+		else if(figura==10)
+			return "/imagen/re.png";
+		else if(figura==11)
+			return "/imagen/rf.png";
+		else if(figura==12)
+			return "/imagen/ce.png";
 		return ruta;	
 	}
 }

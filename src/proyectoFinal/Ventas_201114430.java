@@ -23,7 +23,6 @@ public class Ventas_201114430 extends JFrame implements MouseListener {
 	public JTextField fecha,cantidad;
 	public JComboBox producto,empleado,cliente;
 	public JLabel barraEstado;
-	public String nombre;
 	public final String ruta = System.getProperties().getProperty("user.dir");
 
  	public Ventas_201114430(){
@@ -119,6 +118,65 @@ public class Ventas_201114430 extends JFrame implements MouseListener {
 			}
 		}
 	}	
+	public boolean esNumero(String numLetras){
+		if((numLetras).matches("([0-9]|\\.)+"))
+				return true;
+		return false;
+	}
+	//////////////////////////////Dos metodos para leer fichero//////////////////
+	public String urlS(int archivoEscogido){//escoge ruta segun actividad seleccionada
+		if(archivoEscogido==1)
+			return ruta+"//VENTA.fct";
+			else if(archivoEscogido==2)
+			return ruta+"//EMPLEADO.emp";
+			else if(archivoEscogido==3)
+			return ruta+"//PRODUCTO.prt";
+			else if(archivoEscogido==4)
+			return ruta+"//CLIENTE.clt";
+			return null;		
+		}
+	public void cargarDatos(int archivoEscogido){
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+		// Abre fichero y lo carga en bufferedreader
+		archivo = new File (urlS(archivoEscogido));
+		fr = new FileReader (archivo);
+		br = new BufferedReader(fr);
+		
+		// Lectura del fichero
+		String linea;
+			while((linea=br.readLine())!=null){
+				String[] argtext = linea.split(",");
+				switch(archivoEscogido){
+				case 2:
+					empleado.addItem(argtext[0]+ ", " + argtext[1] + " " + argtext[2]);
+					break;
+				case 3:
+					producto.addItem(argtext[0]+ ", " + argtext[1]);
+					break;
+				case 4:
+					cliente.addItem(argtext[0]+ ", " + argtext[1] + " " + argtext[2]);
+					break;				
+				}
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			}
+		finally{
+			// Se cierra el fichero, para asegurar que se cierra todo.
+			try{
+				if( null != fr ){
+					fr.close();
+					}
+				}catch (Exception e2){
+					e2.printStackTrace();
+					}
+			}
+		}
+	//////////////////////////////Finaliza Leer Fichero//////////////////////////
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (e.getSource()==guardar) {
@@ -156,66 +214,6 @@ public class Ventas_201114430 extends JFrame implements MouseListener {
 
 		}
 	}
-	public boolean esNumero(String numLetras){
-		if((numLetras).matches("([0-9]|\\.)+"))
-				return true;
-		return false;
-	}
-	//////////////////////////////Dos metodos para leer fichero//////////////////
-	public String urlS(int archivoEscogido){//escoge ruta segun actividad seleccionada
-		if(archivoEscogido==1)
-			return ruta+"//VENTA.fct";
-			else if(archivoEscogido==2)
-			return ruta+"//EMPLEADO.emp";
-			else if(archivoEscogido==3)
-			return ruta+"//PRODUCTO.prt";
-			else if(archivoEscogido==4)
-			return ruta+"//CLIENTE.clt";
-			return null;		
-		}
-	public void cargarDatos(int archivoEscogido){
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		try {
-		// Abre fichero y lo carga en bufferedreader
-		archivo = new File (urlS(archivoEscogido));
-		fr = new FileReader (archivo);
-		br = new BufferedReader(fr);
-		
-		// Lectura del fichero
-		String linea;
-			while((linea=br.readLine())!=null){
-				String[] argtext = linea.split(",");
-				//nombre = argtext[1] + " " + argtext[2];
-				switch(archivoEscogido){
-				case 2:
-					empleado.addItem(argtext[0]+ ", " + argtext[1] + " " + argtext[2]);
-					break;
-				case 3:
-					producto.addItem(argtext[0]+ ", " + argtext[1]);
-					break;
-				case 4:
-					cliente.addItem(argtext[0]+ ", " + argtext[1] + " " + argtext[2]);
-					break;				
-				}
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			}
-		finally{
-			// Se cierra el fichero, para asegurar que se cierra todo.
-			try{
-				if( null != fr ){
-					fr.close();
-					}
-				}catch (Exception e2){
-					e2.printStackTrace();
-					}
-			}
-		}
-	//////////////////////////////Finaliza Leer Fichero//////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent even) {}
 	@Override

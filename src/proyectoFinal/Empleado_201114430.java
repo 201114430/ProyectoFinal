@@ -5,13 +5,8 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +21,6 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 	
 	public javax.swing.JButton eliminar,imagenEm,buscarIma;
 	public JTextField codigoEm,nombreEm,apellidoEm,edadEm,cargoEm;
-	public String nombre;
 	public JLabel barraEstado;
 	public final String ruta = System.getProperties().getProperty("user.dir");
 	
@@ -62,7 +56,7 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 			}			
 		}		
 	}
-	private void borrarLista() {
+	private void borrarLista(){
 		if(inicio == null){
 			barraEstado.setText("Realizando busqueda...");
 		}
@@ -201,6 +195,49 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 		add(datosVenta);
 		setVisible(true);
 	}
+	public boolean campoVacio(String contenidoCaja){
+		if(contenidoCaja != null)
+			return true;
+		return false;
+	}
+	public boolean esNumero(String numLetras){
+		if((numLetras).matches("([0-9]|\\.)+"))
+				return true;
+		return false;
+	}
+	////////////Metodo para leer fichero y Cargarlo a Memoria Dinamica//////////////////
+	public void cargarDatos(int archivoEscogido){
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+		// Abre fichero y lo carga en bufferedreader
+		archivo = new File (ruta+"//EMPLEADO.emp");
+		fr = new FileReader (archivo);
+		br = new BufferedReader(fr);
+		// Lectura del fichero
+		String linea;// Guarda de forma dinamica cada linea que se lee en el fichero
+			while((linea=br.readLine())!=null){
+				String[] argtext = linea.split(",");
+				agregarEm(Integer.parseInt(argtext[0]), argtext[1], argtext[2], Integer.parseInt(argtext[3]), argtext[4]);
+				// codigoEmpleado, nombreEmpleado, apellidoEmpleado, edadEmpleado, cargoEmpleado);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			}
+		finally{
+			// Se cierra el fichero, para asegurar que se cierra todo.
+			try{
+				if( null != fr ){
+					fr.close();
+					}
+				}catch(Exception error){
+					error.printStackTrace();
+					}
+			}
+		}
+	//////////////////////////////Finaliza Leer Fichero//////////////////////////
 	@Override
 	public void mousePressed(MouseEvent even) {
 		if (even.getSource()==guardar){
@@ -237,7 +274,7 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 		}
 		if(even.getSource()==eliminar){
 			if(esNumero(codigoEm.getText()) && campoVacio(nombreEm.getText())){
-			int confirma = JOptionPane.showOptionDialog( null,"Esta seguro de elimiar \n" + "el registro del empleado.","Confirma Guardar Datos.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, new Object[] { "Aceptar", "Cancelar",},null);
+			int confirma = JOptionPane.showOptionDialog( null,"Esta seguro de elimiar \n" + "el registro del empleado.","Confirmar Eliminacion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,null, new Object[] { "Aceptar", "Cancelar",},null);
 			if(confirma == 0){
 				EscribirFichero_201114430 es = new EscribirFichero_201114430();
 				es.borrarContenidoFichero(2);//numero de fichero que quiero borrar
@@ -260,49 +297,6 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 			borrarLista();
 		}
 	}
-	////////////Metodo para leer fichero y Cargarlo a Memoria Dinamica//////////////////
-	public void cargarDatos(int archivoEscogido){
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		try {
-		// Abre fichero y lo carga en bufferedreader
-		archivo = new File (ruta+"//EMPLEADO.emp");
-		fr = new FileReader (archivo);
-		br = new BufferedReader(fr);
-		// Lectura del fichero
-		String linea;// Guarda de forma dinamica cada linea que se lee en el fichero
-			while((linea=br.readLine())!=null){
-				String[] argtext = linea.split(",");
-				agregarEm(Integer.parseInt(argtext[0]), argtext[1], argtext[2], Integer.parseInt(argtext[3]), argtext[4]);
-				// codigoEmpleado, nombreEmpleado, apellidoEmpleado, edadEmpleado, cargoEmpleado);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			}
-		finally{
-			// Se cierra el fichero, para asegurar que se cierra todo.
-			try{
-				if( null != fr ){
-					fr.close();
-					}
-				}catch(Exception error){
-					error.printStackTrace();
-					}
-			}
-		}
-	//////////////////////////////Finaliza Leer Fichero//////////////////////////
-	public boolean campoVacio(String contenidoCaja){
-		if(contenidoCaja != null)
-			return true;
-		return false;
-	}
-	public boolean esNumero(String numLetras){
-		if((numLetras).matches("([0-9]|\\.)+"))
-				return true;
-		return false;
-	}
 	@Override
 	public void mouseClicked(MouseEvent even) {}
 	@Override
@@ -311,11 +305,4 @@ public class Empleado_201114430 extends JFrame implements MouseListener{
 	public void mouseExited(MouseEvent even) {}
 	@Override
 	public void mouseReleased(MouseEvent even) {}
-	public static void main(String[] args){
-		Empleado_201114430 emp = new Empleado_201114430();
-
-			
-	}
-
-
 }

@@ -9,9 +9,7 @@ public class EscribirFichero_201114430 {
 	
 	public final String ruta = System.getProperties().getProperty("user.dir");
 	
-	public EscribirFichero_201114430(){
- 		
-	}
+	public EscribirFichero_201114430(){}
 	
 	public void borrarContenidoFichero(int archivoEscogido){
 		System.out.println("Grabando fichero de texto a disco...");

@@ -15,7 +15,5 @@ public class NodoReporteVentasFechas_201114430 {
 		this.precio = precio;
 		this.total = total;
 		this.siguiente = null;
-	}
-	
-	
+	}	
 }

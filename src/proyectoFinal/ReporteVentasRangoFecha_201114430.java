@@ -19,8 +19,6 @@ public class ReporteVentasRangoFecha_201114430 extends JFrame implements MouseLi
 	public javax.swing.JButton reporteFecha;
 	public JTextField fechaIni,fechaFin;
 	public JLabel barraEstado;
-	public String nombre;
-	//public final String ruta = System.getProperties().getProperty("user.dir");
 
  	public ReporteVentasRangoFecha_201114430() {
 		configuracionVentana();
@@ -79,7 +77,7 @@ public class ReporteVentasRangoFecha_201114430 extends JFrame implements MouseLi
 				return true;
 		return false;
 	}
-	public void abrirarchivo(String archivo){
+	public void abrirArchivo(String archivo){
 	     try {
 	            File reporteSeleccionado = new File (archivo);
 	            Desktop.getDesktop().open(reporteSeleccionado);
@@ -87,7 +85,7 @@ public class ReporteVentasRangoFecha_201114430 extends JFrame implements MouseLi
 	            System.out.println("Errores encontrados");
 	     }
 	}
-	public void borraCaja(){
+	public void vaciaCajaTexto(){
 		fechaIni.setText(null);
 		fechaFin.setText(null);
 	}
@@ -110,17 +108,17 @@ public class ReporteVentasRangoFecha_201114430 extends JFrame implements MouseLi
 						re.ordenarVenFech();
 						re.llenarRepVentFec(fi,ff );
 						re.generaRepVenRanFech();
-						abrirarchivo("VentasRangoFechas.html");
-						borraCaja();
+						abrirArchivo("VentasRangoFechas.html");
+						vaciaCajaTexto();
 					}
 					else{
 						barraEstado.setText("Fecha incial mayor que fecha final.");
-						borraCaja();
+						vaciaCajaTexto();
 					}
 				}
 				else{
 					barraEstado.setText("Rango de Fecha incorrecta.");
-					borraCaja();
+					vaciaCajaTexto();
 				}
 		}
 	}
